@@ -3,6 +3,11 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# sql
+db.sqlite3
+.DS_Store
+
+
 # C extensions
 *.so
 
