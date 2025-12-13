@@ -39,7 +39,10 @@ class ExamRequest(models.Model):
     location = models.CharField(max_length=100)
     status = models.CharField(max_length=10, choices=REQUEST_STATUS, default='Open')
 
-class ApplicationRequest(models.Model):
+    def __str__(self):
+        return f"{self.module_name} ({self.university})"
+
+class Application(models.Model):
     scribe = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications')
     exam_request = models.ForeignKey(ExamRequest, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=APPLICATION_STATUS, default='Pending')
