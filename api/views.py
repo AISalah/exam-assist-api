@@ -78,9 +78,32 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = ApplicationSerializer
     permission_classes = [IsAuthenticated]
 
-    # Optional: Logic to only show applications for MY exams
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     if user.profile.role == 'Requester':
-    #         return Application.objects.filter(exam_request__requester=user)
-    #     return Application.objects.filter(scribe=user)
+
+    @action(detail=True, methods=['patch'])
+    def respond(self, request, pk=None):
+        #get the application
+        application = self.get_object()
+
+        #is the person clicking "Accept" actually the owner of the request?
+        request_owner = application.exam_request.requester
+        if request.user != request_owner:
+            return Response(
+                {'error': 'You are not the owner of this exam request!'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        #get the new status from the user's input (Body)
+        new_status = request.data.get('status')
+
+        #validate input
+        valid_statuses = ['Accepted', 'Rejected']
+        if new_status not in valid_statuses:
+            return Response(
+                {'error': f'Invalid status. Choose from: {valid_statuses}'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        application.status = new_status
+        application.save()
+
+        return Response({'status': f'Application marked as {new_status}'})
