@@ -61,7 +61,7 @@ Currently, the project has the **Database Architecture** and **Django Skeleton**
 *   [ ] **Part 4:** Authentication (JWT) & API Endpoints.
 *   [ ] **Part 5:** Deployment & Final Polish.
 
-# ExamAlly (Morocco) - Backend API
+# ExamAssist (Morocco) - Backend API
 
 
 **API Base URL:** 
