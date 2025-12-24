@@ -1,4 +1,4 @@
-# ExamAlly (Morocco) - Backend API
+# ExamAssist (Morocco) - Backend API
 
 **ExamAssist** is a RESTful API designed to bridge the gap between University students (Requesters) with disabilities and High School volunteers (Scribes) in Morocco. The system handles exam requests based on the Moroccan LMD (Licence-Master-Doctorat) academic system.
 
